@@ -10,10 +10,9 @@ use App\Models\Like;
 
 class LikeController extends Controller
 {
-    public function like(Post $post)
+    public function like($postId)
     {
         $userId = Auth::user()->id;
-        $postId = $post->id;
         
         $like = new Like;
         $like->user_id = $userId;
@@ -23,15 +22,13 @@ class LikeController extends Controller
         return redirect()->back();
     }
 
-    public function unlike(Post $post)
+    public function unlike($postId)
     {
         $userId = Auth::user()->id;
-        $postId = $post->id;
 
         $like = Like::where('post_id', $postId)->where('user_id', $userId)->first();
-        if ($like) {
-            $like->delete();
-        }
+        $like->delete();
+
         return redirect()->back();
     }
 }
