@@ -43,11 +43,12 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    // Userモデルは複数のPostモデルを持つ関係を定義
     public function posts()
     {
         return $this->hasMany(Post::class, 'user_id');
     }
-
+    // Userモデルは複数のLikeモデルを持つ関係を定義
     public function likes()
     {
         return $this->hasMany(Like::class, 'user_id');

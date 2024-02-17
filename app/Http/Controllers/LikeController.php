@@ -10,25 +10,32 @@ use App\Models\Like;
 
 class LikeController extends Controller
 {
-    public function like($postId)
+    // ポストIDに紐づくポストにいいねする
+    public function like($post_id)
     {
-        $userId = Auth::user()->id;
-        
+        // Likeモデルの新しいインスタンスを作成
         $like = new Like;
-        $like->user_id = $userId;
-        $like->post_id = $postId;
+        // ユーザIDとポストIDを設定して保存
+        $like->user_id = Auth::user()->id;
+        $like->post_id = $post_id;
         $like->save();
-
+        // 呼び出し元ページにリダイレクト
         return redirect()->back();
     }
 
-    public function unlike($postId)
+    // ポストIDに紐づくポストのいいねを外す
+    public function unlike($post_id)
     {
-        $userId = Auth::user()->id;
+        // 現在のユーザIDを取得
+        $user_id = Auth::user()->id;
 
-        $like = Like::where('post_id', $postId)->where('user_id', $userId)->first();
-        $like->delete();
-
+        // 特定の投稿とユーザーに関連するLikeモデルを検索
+        $like = Like::where('post_id', $post_id)->where('user_id', $user_id)->first();
+        // Likeモデルが見つかった場合、削除
+        if ($like) {
+            $like->delete();
+        }
+        // 呼び出し元ページにリダイレクト
         return redirect()->back();
     }
 }
