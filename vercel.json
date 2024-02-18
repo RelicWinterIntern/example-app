@@ -3,11 +3,11 @@
     "builds": [
         {
             "src": "api/index.php",
-            "use": "tyhk1279@gmail.com"
+            "use": "vercel-php@0.6.0"
         },
         {
             "src": "public/**",
-            "use": "tyhk1279@gmail.com"
+            "use": "vercel-php@0.6.0"
         }
     ],
     "routes": [
