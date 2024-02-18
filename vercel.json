@@ -3,7 +3,7 @@
     "builds": [
         {
             "src": "api/index.php",
-            "use": "tyhk1279@gmail.com",
+            "use": "tyhk1279@gmail.com"
         },
         {
             "src": "public/**",
