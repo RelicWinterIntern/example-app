@@ -3,11 +3,11 @@
     "builds": [
         {
             "src": "api/index.php",
-            "use": "[email protected]"
+            "use": "tyhk1279@gmail.com",
         },
         {
             "src": "public/**",
-            "use": "[email protected]"
+            "use": "tyhk1279@gmail.com"
         }
     ],
     "routes": [
