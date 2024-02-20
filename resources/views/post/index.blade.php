@@ -17,6 +17,22 @@
         </div>
 
         <div class="my-4">
+            @if (!empty($survey))
+                <ul>
+                    @foreach ($surveys as $survey)
+                        <li class="mb-6 bg-white border rounded-lg p-4">
+                            <h3 class="text-lg font-bold mb-2 border-bottom">{{ $survey->title }}</h3>
+                            <p class="text-gray-1000 mt-4">{{ $survey->body }}</p>
+                            <div class="flex justify-between mt-8">
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
+            @else
+                <div class="flex justify-center items-center h-full">
+                    <p class="text-lg text-gray-600">投票できる投稿はありません。</p>
+                </div>
+            @endif
             @if (!empty($posts))
                 <ul>
                     @foreach ($posts as $post)
