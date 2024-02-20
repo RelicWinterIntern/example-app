@@ -13,10 +13,14 @@ class Post extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function likes()
+    public function totalLikes()
     {
-        return $this->belongsTo(Like::class, 'id', 'id');
+        $total = $this->belongsTo(Total_like::class, 'id', 'id');
+        return $total;
+        
     }
+
+    
 }
 
 

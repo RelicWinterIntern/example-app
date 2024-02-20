@@ -43,6 +43,32 @@ class PostController extends Controller
         return redirect()->route('post.index')->with('success', '投稿が作成されました');
     }
 
+    public function likebutton($postid)
+    {
+        $totallike = Like::where('id', $postid)->where('user_id', Auth::id())->first();
+        if (!$totallike) {
+            $like = new Like();
+            $like->post_id = $postid;
+            $like->user_id = Auth::id();
+            $like->save();
+        }
+        else {
+            
+        }
+
+        $this->totallikeUpdate($postid);
+
+        return redirect()->route('post.index');
+    }
+
+    public function totallikeUpdate($postid):void
+    {
+        
+        $total = Total_like::where('id', $postid)->first();
+        $total->likes_count = Like::where('post_id', $postid)->count();
+        $total->save();
+    }
+
     public function myPosts()
     {
         $posts = Post::where('user_id', Auth::id())->orderBy('updated_at', 'desc')->get();
