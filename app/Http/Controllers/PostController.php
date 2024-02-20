@@ -25,13 +25,28 @@ class PostController extends Controller
             'title' => 'required|string|max:255',
             'body' => 'required|string',
             'topic_tag' => 'required|string',
-
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+        // フォームでリクエストされた画像を取得
+        $img = $request->file('image');
 
         $post = new Post();
         $post->title = $validatedData['title'];
         $post->body = $validatedData['body'];
         $post->topic_tag = $validatedData['topic_tag'];
+
+        // 画像情報がセットされていれば、保存処理を実行
+        if (isset($img)) {
+            // storage > public > img配下に画像が一時的に保存される
+            $imgPath = $img->store('img','public');
+            // store処理が実行できたらDBに保存処理を実行
+            if ($imgPath) {
+                // DBに登録する処理
+                $post->img_path = $imgPath;
+            }
+        }
+
         $post->user_id = Auth::id();
         $post->save();
 
