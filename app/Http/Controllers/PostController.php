@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Like;
+use App\Models\Total_like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,7 +34,7 @@ class PostController extends Controller
         $post->user_id = Auth::id();
         $post->save();
         // like
-        $like = new Like();
+        $like = new Total_like();
         $like->id = $post->id;
         $like->user_id = Auth::id();
         $like->save();

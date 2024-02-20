@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('likes', function (Blueprint $table) {
+        Schema::create('total_likes', function (Blueprint $table) {
             $table->id();
+            $table->foreign('id') // 外部キー制約の作成
+              ->references('id')
+              ->on('posts');
             $table->BigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             // いいね数のカウント
@@ -26,6 +29,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('likes');
+        Schema::dropIfExists('togal_likes');
     }
 };
+
+
