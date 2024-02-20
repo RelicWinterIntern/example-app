@@ -40,7 +40,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/myposts', [PostController::class, 'myPosts'])->name('myposts');
 
-    Route::get('/survey/create', [SurveyController::class, 'survey'])->name('survey.create');
+    Route::get('/survey/create', [SurveyController::class, 'create'])->name('survey.create');
+    // store
+    Route::post('/survey/store', [SurveyController::class, 'store'])->name('survey.store');
 
 
 });
