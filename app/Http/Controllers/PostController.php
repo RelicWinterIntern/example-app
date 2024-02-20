@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,6 +32,12 @@ class PostController extends Controller
         $post->body = $validatedData['body'];
         $post->user_id = Auth::id();
         $post->save();
+        // like
+        $like = new Like();
+        $like->id = $post->id;
+        $like->user_id = Auth::id();
+        $like->save();
+        
 
         return redirect()->route('post.index')->with('success', '投稿が作成されました');
     }

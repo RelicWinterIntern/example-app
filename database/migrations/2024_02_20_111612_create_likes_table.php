@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('likes', function (Blueprint $table) {
             $table->id();
+            $table->foreign('id') // 外部キー制約の作成
+              ->references('id')
+              ->on('posts');
+            $table->BigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
+            // いいね数のカウント
+            $table->double('likes_count')->default(0);
             $table->timestamps();
         });
     }
