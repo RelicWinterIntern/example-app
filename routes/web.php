@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SurveyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,6 +39,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/post/like/{id}', [PostController::class, 'likebutton'])->name('post.likebutton');
 
     Route::get('/myposts', [PostController::class, 'myPosts'])->name('myposts');
+
+    Route::get('/survey/create', [SurveyController::class, 'create'])->name('survey.create');
+    // store
+    Route::post('/survey/store', [SurveyController::class, 'store'])->name('survey.store');
+
+
 });
 
 require __DIR__.'/auth.php';

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Like;
+use App\Models\Survey;
 use App\Models\Total_like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,9 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::orderBy('updated_at', 'desc')->get();
-        return view('post.index', compact('posts'));
+        $surveys = Survey::orderBy('updated_at', 'desc')->get();
+
+        return view('post.index', compact('posts', 'surveys'));
     }
 
     public function create()
