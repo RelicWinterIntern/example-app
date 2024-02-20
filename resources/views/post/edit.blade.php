@@ -41,7 +41,23 @@
                                     @enderror
                                 </div>
                             </div>
-
+                            <div class="form-group row">
+                                <label for="topic_tag" class="col-md-4 col-form-label text-md-right">{{ __('タグ') }}</label>
+                                <div class="col-md-6">
+                                    <select name="topic_tag" id="topic_tag" class="form-control @error('topic_tag') is-invalid @enderror" required>
+                                        <option value="フリー" {{$post->topic_tag == 'フリー' ? "selected" : ''}}>フリー</option>
+                                        <option value="スポーツ" {{$post->topic_tag == 'スポーツ' ? "selected" : ''}}>スポーツ</option>
+                                        <option value="アニメ" {{$post->topic_tag == 'アニメ' ? "selected" : ''}}>アニメ</option>
+                                        <option value="ゲーム" {{$post->topic_tag == 'ゲーム' ? "selected" : ''}}>ゲーム</option>
+                                        <option value="鑑賞" {{$post->topic_tag == '鑑賞' ? "selected" : ''}}>鑑賞</option>
+                                    </select>
+                                    @error('topic_tag')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
