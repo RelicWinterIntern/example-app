@@ -45,12 +45,13 @@ class PostController extends Controller
 
     public function likebutton($postid)
     {
-        $totallike = Like::where('id', $postid)->where('user_id', Auth::id())->first();
+        $totallike = Like::where('post_id', $postid)->where('user_id', Auth::id())->first();
+
         if (!$totallike) {
             $like = new Like();
             $like->post_id = $postid;
             $like->user_id = Auth::id();
-            $like->save();
+            $data = $like->save();
         }
         else {
             
