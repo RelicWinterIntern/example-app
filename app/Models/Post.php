@@ -40,19 +40,14 @@ class Post extends Model
     }
 
     // URLをアンカータグでリンク化する
-    public function makeLink($url) {
+    public function makeLink($comment) {
         //URL抽出の正規表現
         $pattern = '/https?:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:@&=+$,%#]+/';
-    
         //該当する文字列に処理
-        $comment = preg_replace_callback(
-            $pattern,
-            function ($matches) {
-                return '<a href="'.$matches[0].'">'.$matches[0].'</a>';
-            },
-            htmlspecialchars($comment)
-        );
-    
-        return $comment;
+        $url = preg_replace_callback($pattern, function ($matches) {
+                return '<a href="'.$matches[0].'" target="_blank">'.$matches[0].'</a>';
+            }, htmlspecialchars($comment));
+        //dd($comment, $url)
+        return $url;
     }
 }
