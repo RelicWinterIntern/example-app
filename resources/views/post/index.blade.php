@@ -53,15 +53,15 @@
             @if (!empty($posts))
                 <ul class="">
                     @foreach ($posts as $post)
-                        <li class=" mb-6  bg-emerald-200 border rounded-xl p-2">
-                            <p class=" mb-1 pl-3 text-gray-900">{{ $post->title }}</p>
-                            {{-- <p class="text-gray-1000 mt-4">{{ $post->body }}</p> --}}
-                            {{-- <div class="flex justify-between mt-8"> --}}
-                                {{-- <p class="text-gray-600">{{ $post->user->name }}</p> --}}
-                                {{-- <p class="text-gray-600">{{ $post->updated_at }}</p> --}}
-                                {{-- <p>{{ $post->totalLikes->likes_count }}いいね</p> --}}
-                                {{-- <a href="{{ route('post.likebutton', $post->id) }}" class="btn  btn-primary">いいね</a> --}}
-                            {{-- </div> --}}
+                        <li class="mb-6 bg-white border rounded-lg p-4">
+                            <h3 class=" font-bold mb-2 border-bottom">{{ $post->title }}</h3>
+                            <p class="text-gray-1000 mt-4">{{ $post->body }}</p>
+                            <div class="flex justify-between mt-8">
+                                <p class="text-gray-600">{{ $post->user_id }}のツイート</p>
+                                <p class="text-gray-600">{{ $post->updated_at }}</p>
+                                <p class="text-red-600">いいね数：{{ $post->totalLikes->likes_count }}</p>
+                                <a href="{{ route('post.likebutton', $post->id) }}" class="btn  btn-primary">いいね</a> 
+                            </div>
                         </li>
                     @endforeach
                 </ul>
