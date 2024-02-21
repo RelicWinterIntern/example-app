@@ -27,17 +27,37 @@
                             </div>
                             <div class="bg-gradient-to-r  from-green-200  to-purple-200">
                             <div class="flex justify-center  bg-gradient-to-r from-green-200  to-purple-200 text-3xl">
-                                <p class="text-green-500 hover:text-blue-500">
+                                @if ($vote->vote_status == 1)
+
+                                    <p class="text-gray-500 text-base pt-2 hover:text-blue-500">
+                                    
+                                        {{ $survey[3] }}より
+                                    
+                                    </p>
+                                    <p class="text-green-500 hover:text-blue-500">
+                                   
+                                    <p class="text-purple-500 hover:text-blue-500 pl-3 ">
                                     
                                         {{ $survey[2] }}
                                     
-                                </p>
-                                <p class="text-gray-600 mx-4 pt-2 text-xl">or</p>
-                                <p class="text-purple-500 hover:text-blue-500 ">
+                                    </p>
+                                @elseif ($vote->vote_status == 2)
+                                    <p class="text-gray-500 text-base pt-2 hover:text-blue-500">
+                                    
+                                        {{ $survey[2] }}より
+                                    
+                                    </p>
+
+                                     <p class="text-purple-500 hover:text-blue-500 pl-3">
                                     
                                         {{ $survey[3] }}
                                     
-                                </p>
+                                    </p>
+                                @endif
+                                
+                            
+                                
+                                
                             </div>
                             
                             {{-- <div class="bg-white  border-2"> --}}
