@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Like;
+use App\Models\Vote;
 use App\Models\Survey;
 use App\Models\Total_like;
 use Illuminate\Http\Request;
@@ -85,6 +86,24 @@ class PostController extends Controller
 
         return redirect()->route('post.index');
     }
+
+    // vote1
+    public function vote1($id)
+    {
+        $vote = Vote::where('survey_id', $id)->where('user_id', Auth::id())->first();
+        if (!$vote) {
+            $vote = new Vote();
+            $vote->survey_id = $id;
+            $vote->comment = '';
+            $vote->vote_status = 1;
+            $vote->user_id = Auth::id();
+            $vote->save(); 
+        } else {
+           
+        }
+        return view('survey.vote1', compact('vote'));
+    }
+    
 
     public function totallikeUpdate($postid):void
     {

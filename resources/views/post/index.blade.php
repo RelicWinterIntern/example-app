@@ -27,11 +27,15 @@
                             <div class="bg-gradient-to-r  from-green-200  to-purple-200">
                             <div class="flex justify-center  bg-gradient-to-r from-green-200  to-purple-200 text-3xl">
                                 <p class="text-green-500 hover:text-blue-500">
-                                    {{ $random_data[2] }}
+                                    <a href="{{ route('survey.vote1', $random_data[0]) }}">
+                                        {{ $random_data[2] }}
+                                    </a>
                                 </p>
                                 <p class="text-gray-600 mx-4 pt-2 text-xl">or</p>
                                 <p class="text-purple-500 hover:text-blue-500 ">
-                                    {{ $random_data[3] }}
+                                    <a href="{{ route('survey.vote2', $random_data[0]) }}">
+                                        {{ $random_data[3] }}
+                                    </a>
                                 </p>
                             </div>
                             {{-- <div class="bg-white  border-2"> --}}

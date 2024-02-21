@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Survey;
+use App\Models\Vote;
 use App\Models\Total_like;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,6 +36,40 @@ class SurveyController extends Controller
         $survey->save();
         
         return redirect()->route('post.index')->with('success', 'お題が作成されました');
+    }
+
+    // vote1
+    public function vote1($id)
+    {
+        $vote = Vote::where('survey_id', $id)->where('user_id', Auth::id())->first();
+        if (!$vote) {
+            $vote = new Vote();
+            $vote->survey_id = $id;
+            $vote->comment = '';
+            $vote->vote_status = 1;
+            $vote->user_id = Auth::id();
+            $vote->save(); 
+        } else {
+           
+        }
+        return view('survey.vote1', compact('vote'));
+    }
+    
+    // vote1
+    public function vote2($id)
+    {
+        $vote = Vote::where('survey_id', $id)->where('user_id', Auth::id())->first();
+        if (!$vote) {
+            $vote = new Vote();
+            $vote->survey_id = $id;
+            $vote->comment = '';
+            $vote->vote_status = 2;
+            $vote->user_id = Auth::id();
+            $vote->save(); 
+        } else {
+           
+        }
+        return view('survey.vote1', compact('vote'));
     }
 
 
