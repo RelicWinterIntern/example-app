@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Survey;
+use App\Models\Vote;
 use App\Models\Total_like;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,5 +38,74 @@ class SurveyController extends Controller
         return redirect()->route('post.index')->with('success', 'お題が作成されました');
     }
 
+    // vote1
+    public function vote1($id)
+    {
+        $vote = Vote::where('survey_id', $id)->where('user_id', Auth::id())->first();
+        if (!$vote) {
+            $vote = new Vote();
+            $vote->survey_id = $id;
+            $vote->comment = '';
+            $vote->vote_status = 1;
+            $vote->user_id = Auth::id();
+            $vote->save(); 
+        } else {
+           
+        }
+
+        if(ctype_digit($id)){
+            $survey = $this->csvSurvey($id);
+        }
+        else{
+            $survey = null;
+        }
+        return view('survey.vote', compact('vote', 'survey'));
+    }
+    
+    // vote1
+    public function vote2($id)
+    {
+        $vote = Vote::where('survey_id', $id)->where('user_id', Auth::id())->first();
+        if (!$vote) {
+            $vote = new Vote();
+            $vote->survey_id = $id;
+            $vote->comment = '';
+            $vote->vote_status = 2;
+            $vote->user_id = Auth::id();
+            $vote->save(); 
+        } else {
+           
+        }
+        $file = public_path('/data.csv');
+
+        if(ctype_digit($id)){
+            $survey = $this->csvSurvey($id);
+        }
+        else{
+            $survey = null;
+        }
+
+        return view('survey.vote', compact('vote', 'survey'));
+    }
+
+    public function csvSurvey($suveyid)
+    {
+
+        $file = public_path('/data.csv');
+
+        $data = [];
+        if (file_exists($file)) {
+            $handle = fopen($file, 'r');
+            while (($line = fgetcsv($handle)) !== false)
+            {
+            $data[] = $line;
+            }
+
+        fclose($handle);
+        }
+        array_shift($data);
+
+        return $data[$suveyid];
+    }
 
 }
