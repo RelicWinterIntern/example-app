@@ -43,6 +43,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/survey/create', [SurveyController::class, 'create'])->name('survey.create');
     // store
     Route::post('/survey/store', [SurveyController::class, 'store'])->name('survey.store');
+    // vote1
+    Route::get('/survey/vote1/{id}', [SurveyController::class, 'vote1'])->name('survey.vote1');
+    // vote2
+    Route::get('/survey/vote2/{id}', [SurveyController::class, 'vote2'])->name('survey.vote2');
 
 
 });
