@@ -52,7 +52,14 @@ class SurveyController extends Controller
         } else {
            
         }
-        return view('survey.vote1', compact('vote'));
+
+        if(ctype_digit($id)){
+            $survey = $this->csvSurvey($id);
+        }
+        else{
+            $survey = null;
+        }
+        return view('survey.vote', compact('vote', 'survey'));
     }
     
     // vote1
@@ -69,8 +76,36 @@ class SurveyController extends Controller
         } else {
            
         }
-        return view('survey.vote1', compact('vote'));
+        $file = public_path('/data.csv');
+
+        if(ctype_digit($id)){
+            $survey = $this->csvSurvey($id);
+        }
+        else{
+            $survey = null;
+        }
+
+        return view('survey.vote', compact('vote', 'survey'));
     }
 
+    public function csvSurvey($suveyid)
+    {
+
+        $file = public_path('/data.csv');
+
+        $data = [];
+        if (file_exists($file)) {
+            $handle = fopen($file, 'r');
+            while (($line = fgetcsv($handle)) !== false)
+            {
+            $data[] = $line;
+            }
+
+        fclose($handle);
+        }
+        array_shift($data);
+
+        return $data[$suveyid];
+    }
 
 }

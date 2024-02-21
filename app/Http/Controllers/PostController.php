@@ -19,7 +19,6 @@ class PostController extends Controller
 
         $file = public_path('/data.csv');
 
-        $handles = fopen($file, 'r');
 
         $data = [];
         if (file_exists($file)) {
