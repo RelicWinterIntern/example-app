@@ -8,7 +8,7 @@
     <div class="max-w-7xl mx-auto mt-10 sm:px-6 lg:px-8">
         <div class="my-4">
             <div class="bg-white shadow p-6 rounded-lg">
-                <f action="{{ route('post.store') }}" method="post">
+                <form action="{{ route('post.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-4">
                         <label for="title" class="block text-gray-700 text-sm font-bold mb-2">タイトル</label>

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Post extends Model
 {
-    protected $fillable = ['title', 'body', 'author_name'];
+    protected $fillable = ['title', 'body', 'author_name', 'img_path'];
 
     // Postモデルは１つのUserモデルに属する関係を定義
     public function user()

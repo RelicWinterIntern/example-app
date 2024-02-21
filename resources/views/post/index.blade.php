@@ -19,11 +19,13 @@
         <div class="my-4">
             @if (!empty($posts))
                 <ul>
-                @foreach ($posts as $post)
+                    @foreach ($posts as $post)
                         <li class="mb-6 bg-white border rounded-lg p-4">
                             <h2 class="text-lg font-bold mb-2 border-bottom">{{ $post->title }}</h2>
                             <p class="text-gray-1000 mt-4">{!! nl2br($post->makeLink($post->body)) !!}</p>
-                            <img src="{{ Storage::url($post->img_path) }}" width="25%">
+                            @if(isset($post->img_path))
+                                <img src="{{ asset($post->img_path) }}" alt="投稿画像">
+                            @endif
                             <div class="flex justify-between mt-8">
                                 <span>
                                     @if ($post->is_liked())

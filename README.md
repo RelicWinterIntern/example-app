@@ -47,7 +47,7 @@ phpMyAdmin: http://localhost:8080/
 
 ```sh
 # MySQLコンソールにログイン
-docker-compose exec mysql mysql -u sail -p'password' example_app
+docker-compose exec mysql mysql -u sail -p 'password' example_app
 
 # キャッシュ削除
 docker-compose exec laravel.test php artisan cache:clear
