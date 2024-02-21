@@ -14,9 +14,30 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::orderBy('updated_at', 'desc')->get();
-        $surveys = Survey::orderBy('updated_at', 'desc')->get();
+        // $surveys = Survey::orderBy('updated_at', 'desc')->get();
 
-        return view('post.index', compact('posts', 'surveys'));
+        $file = public_path('/data.csv');
+
+        $handles = fopen($file, 'r');
+
+        $data = [];
+        if (file_exists($file)) {
+            $handle = fopen($file, 'r');
+            while (($line = fgetcsv($handle)) !== false)
+            {
+            $data[] = $line;
+            }
+
+        fclose($handle);
+        }
+
+        // お題をランダムで取得
+        array_shift($data);
+        $random = array_rand($data, 1);
+        $random_data = $data[$random];
+        
+
+        return view('post.index', compact('posts', 'random_data'));
     }
 
     public function create()
